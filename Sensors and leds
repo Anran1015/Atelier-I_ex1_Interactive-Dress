@@ -1,3 +1,16 @@
+
+/** 
+ *  
+ *  DIGF-2004-001 Atelier I: Discovery
+ *  Interactive Dress
+ *  Anran Zhou 3157820
+ *  Ziyi Wang 3158674
+ *  
+  */
+
+
+
+
 // RGB led A:
 int ra = 6; //red pin of led A
 int ga = 5; //green pin of led A
@@ -84,3 +97,12 @@ void loop() {
   Serial.println("--");          // print base 2
   delay(100);                    // delay in between reads for stability
 }
+
+/** 
+ *  Reference:
+ *  http://www.instructables.com/id/Powering-Arduino-with-a-Battery/
+ *  https://www.youtube.com/watch?v=Y0Qoo8lmK24
+ *  http://howtomechatronics.com/tutorials/arduino/how-to-use-a-rgb-led-with-arduino/
+ *  http://www.kobakant.at/DIY/?p=6102
+ *  
+  */
