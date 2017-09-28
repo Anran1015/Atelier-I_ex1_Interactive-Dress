@@ -1,26 +1,26 @@
 
-/** 
- *  
- *  DIGF-2004-001 Atelier I: Discovery
- *  Interactive Dress
- *  Anran Zhou 3157820
- *  Ziyi Wang 3158674
- *   code for sensors and leds
- *
-  */
+/**
+
+    DIGF-2004-001 Atelier I: Discovery
+    Interactive Dress
+    Anran Zhou 3157820
+    Ziyi Wang 3158674
+    code for sensors and leds
+*/
 
 
 
 
-// RGB led A:
-int ra = 6; //red pin of led A
-int ga = 5; //green pin of led A
-int ba = 3; //blue pin of led A
+//RGB led A: middle led
+int ra = 9; //red pin of led A
+int ga = 10; //green pin of led A
+int ba = 11; //blue pin of led A
 
-//RGB led B:
-int rb = 11;  // red pin of led B
-int gb = 10; // green pin of led B
-int bb = 9;  //blue pin of led B
+
+//RGB led B:bottom led
+int rb = 3;  // red pin of led B
+int gb = 5; // green pin of led B
+int bb = 6;  //blue pin of led B
 
 
 int sensora = A0; //detect the pressure sensitive textile A
@@ -30,7 +30,7 @@ int sensorb = A1;// detect the pressure sensitive textile B
 void setup() {
   // initialize serial communication at 9600 bits per second:
   Serial.begin(9600);
-  
+
   // define the rgb led pins as output
   pinMode(ra, OUTPUT);
   pinMode(ga, OUTPUT);
@@ -56,39 +56,43 @@ void loop() {
   //so we tested the value of each textile separately in order to get the exact value range,
   // and manipulate the status of leds accordingly
 
-  if (sensorValuea > 920) {
+    if (sensorValuea > 524) {
+  
+  
+      digitalWrite(ra, 255);
+      digitalWrite(ga, 255);
+      digitalWrite(ba, 255);
+      //when the value of Textile A is more than 920 (at rest), dim the led.
+  
+  
+    } else {
+  
+      analogWrite(ra, 120);
+      analogWrite(ga, 20);
+      analogWrite(ba, 40);
+      //when the value of Textile A is less than 920 (pressed), light up the led!
+    }
 
 
-    digitalWrite(ra, 255);
-    digitalWrite(ga, 255);
-    digitalWrite(ba, 255);
+  if (sensorValueb > 590) {
+
+
+    digitalWrite(rb, 255);
+    digitalWrite(gb, 255);
+    digitalWrite(bb, 255);
     //when the value of Textile A is more than 920 (at rest), dim the led.
 
 
   } else {
 
-    analogWrite(ra, 120);
-    analogWrite(ga, 20);
-    analogWrite(ba, 40);
+    analogWrite(rb, 20);
+    analogWrite(gb, 120);
+    analogWrite(bb, 40);
     //when the value of Textile A is less than 920 (pressed), light up the led!
   }
 
 
-  if (sensorValueb > 450) {
 
-    analogWrite(rb, 20);
-    analogWrite(gb, 230);
-    analogWrite(bb, 200);
-    //when the value of Textile B is more than 450 (at rest), dim the led.
-
-
-  } else {
-
-    analogWrite(rb, 220);
-    analogWrite(gb, 30);
-    analogWrite(bb, 203);
-    //when the value of Textile A is less than 450 (pressed), light up the led!
-  }
 
 
   //print the value in the monitor so we can debug easily
@@ -96,14 +100,14 @@ void loop() {
   Serial.print("\t");            // print a tab
   Serial.print(sensorValueb);    // print the value detected from textile B
   Serial.println("--");          // print base 2
-  delay(100);                    // delay in between reads for stability
+  delay(200);                    // delay in between reads for stability
 }
 
-/** 
- *  Reference:
- *  http://www.instructables.com/id/Powering-Arduino-with-a-Battery/
- *  https://www.youtube.com/watch?v=Y0Qoo8lmK24
- *  http://howtomechatronics.com/tutorials/arduino/how-to-use-a-rgb-led-with-arduino/
- *  http://www.kobakant.at/DIY/?p=6102
- *  
-  */
+/**
+    Reference:
+    http://www.instructables.com/id/Powering-Arduino-with-a-Battery/
+    https://www.youtube.com/watch?v=Y0Qoo8lmK24
+    http://howtomechatronics.com/tutorials/arduino/how-to-use-a-rgb-led-with-arduino/
+    http://www.kobakant.at/DIY/?p=6102
+
+*/
